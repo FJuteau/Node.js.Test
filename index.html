@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Louis - Socket.io</title>
+    </head>
+ 
+    <body>
+        <h1>Application web louis coté voiturier</h1>
+        
+<!--
+        <form id="formulaire">
+            <p><input type="text" value="rien" id="textField" /><input type="submit" value="Envoyer" id="send"></p>
+        </form>
+-->
+        <p><input type='button' value='userEmail' id='arriveButton'></p>
+        <section id="buttonZone">
+            
+        </section>
+
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io.connect('http://localhost:8080');
+            
+            var email = prompt('Quel est votre adresse email ?');
+            socket.emit('ValetEmail', email);
+            
+            socket.on('arrive' + email, function(userEmail){
+                $('body').prepend("<p><input type='button' value='"+userEmail+"' id='arriveButton'></p>");
+            })
+            
+//            socket.on('tchatMessage', function(tchatMessage){
+//                $('#zone-chat').prepend("<p><b>"+tchatMessage.pseudo+"</b> : "+tchatMessage.text+"</p>");
+//            })
+            
+            $("#arriveButton").click(function(){
+                socket.emit('LogButton', 'lalalalalalal');
+            });
+            
+//            function click()
+//            {
+//                console.log('html');
+//            }
+            
+        </script>
+    </body>
+</html>
